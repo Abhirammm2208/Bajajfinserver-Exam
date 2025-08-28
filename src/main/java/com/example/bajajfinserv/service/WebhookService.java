@@ -11,7 +11,6 @@ public class WebhookService {
     private final RestTemplate restTemplate = new RestTemplate();
 
     public void executeFlow() {
-        // Step 1: Generate webhook
         String url = "https://bfhldevapigw.healthrx.co.in/hiring/generateWebhook/JAVA";
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("name", "Chintalagattu Abhiram");
@@ -33,10 +32,8 @@ public class WebhookService {
         System.out.println("webhookUrl: " + webhookUrl);
         System.out.println("accessToken: " + accessToken);
 
-        // Step 2: Prepare SQL query (Question 2) as a single line, and use 'solution' as the key
         String finalQuery = "SELECT e.EMP_ID, e.FIRST_NAME, e.LAST_NAME, d.DEPARTMENT_NAME, (SELECT COUNT(*) FROM EMPLOYEE e2 WHERE e2.DEPARTMENT = e.DEPARTMENT AND e2.DOB > e.DOB) AS YOUNGER_EMPLOYEES_COUNT FROM EMPLOYEE e JOIN DEPARTMENT d ON e.DEPARTMENT = d.DEPARTMENT_ID ORDER BY e.EMP_ID DESC;";
 
-        // Step 3: Submit solution with correct key and header
         Map<String, String> answerBody = new HashMap<>();
         answerBody.put("solution", finalQuery);
 
